@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:module_a_practice3/presentaiton/components/custom_button.dart';
 import 'package:module_a_practice3/presentaiton/components/custom_text_field.dart';
 import 'package:module_a_practice3/presentaiton/providers/profile_and_target_provider.dart';
+import 'package:module_a_practice3/presentaiton/screens/sign_in_screen.dart';
 
 import '../../common/fonts.dart';
 
@@ -85,12 +86,16 @@ class _ProfileAndTargetScreenState extends State<ProfileAndTargetScreen> {
             ),
             Spacer(),
 
-            CustomTextField(hint: '80.5', iconImage: 'assets/icons/weight-svgrepo-com.svg', controller: profileAndTargetProvider.widthController, label: 'Steps', textInputType: TextInputType.number,),
+            CustomTextField(hint: '5,000', iconImage: 'assets/icons/walk.svg', controller: profileAndTargetProvider.waterController, label: 'Steps', textInputType: TextInputType.number,),
             SizedBox(height: 10,),
-            CustomTextField(hint: '1986.09.30', iconImage: 'assets/icons/cake-svgrepo-com.svg', controller: profileAndTargetProvider.birthController, label: 'ml', textInputType: TextInputType.number,),
+            CustomTextField(hint: '5,000', iconImage: '', icon: Icons.water_drop_outlined, controller: profileAndTargetProvider.walkController, label: 'ml', textInputType: TextInputType.number,),
             Spacer(),
             
-            CustomButton(text: 'Complete', function: () {}),
+            CustomButton(text: 'Complete', function: () async {
+              await profileAndTargetProvider.proAndTarTest()
+                  ? Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SignInScreen()))
+                  : Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SignInScreen()));
+            }),
             Spacer(),
           ],
         ),

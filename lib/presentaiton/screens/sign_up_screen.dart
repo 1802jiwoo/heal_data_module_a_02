@@ -9,8 +9,30 @@ import 'package:module_a_practice3/presentaiton/screens/sign_in_screen.dart';
 import '../components/custom_button2.dart';
 import '../components/error_box.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
+
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+
+  void updateScreen() => setState(() {});
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      signUpProvider.addListener(updateScreen);
+    },);
+  }
+
+  @override
+  void dispose() {
+    signUpProvider.removeListener(updateScreen);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +63,16 @@ class SignUpScreen extends StatelessWidget {
                 SizedBox(height: 10,),
                 CustomTextField(hint: 'Confirm Password', iconImage: '', controller: signUpProvider.confirmPasswordController, label: '', icon: Icons.lock_reset, textInputType: TextInputType.visiblePassword,),
                 Spacer(),
-                CustomButton(text: 'Sign Up', function: () {Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ProfileAndTargetScreen(username: signUpProvider.nameController.text)));}),
+                CustomButton(text: 'Sign Up', function: () async {
+                  await signUpProvider.nameTextField()
+                      ? await signUpProvider.nameTextField()
+                      ? await signUpProvider.idTextField()
+                      ? await signUpProvider.passwordTextField()
+                      ? await signUpProvider.confirmPasswordTextField()
+                      ? await signUpProvider.signUpTest()
+                      ? Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ProfileAndTargetScreen(username: signUpProvider.nameController.text)))
+                      : null : null : null : null : null : null;
+                }),
                 Spacer(),
 
                 Container(
@@ -62,7 +93,18 @@ class SignUpScreen extends StatelessWidget {
               ],
             ),
           ),
-
+          signUpProvider.isIdError || signUpProvider.isNameError
+              ? Align(alignment: Alignment.center, child: ErrorBox(text: '모든 항목은 필수로 입력되어야 합니다.'))
+              : SizedBox.shrink(),
+          signUpProvider.isPasswordError
+              ? Align(alignment: Alignment.center, child: ErrorBox(text: '비밀번호는 4자리 이상이어야 합니다.'))
+              : SizedBox.shrink(),
+          signUpProvider.isConfirmPasswordError
+              ? Align(alignment: Alignment.center, child: ErrorBox(text: '비밀번호와 비밀번호 확인은 같아야 합니다.'))
+              : SizedBox.shrink(),
+          signUpProvider.isSignUpError
+              ? Align(alignment: Alignment.center, child: ErrorBox(text: '회원가입에 실패했습니다.'))
+              : SizedBox.shrink(),
           signUpProvider.passwordReset
               ? Align(alignment: Alignment.center, child: ErrorBox(text: '준비중인 기능입니다.'))
               : SizedBox.shrink(),

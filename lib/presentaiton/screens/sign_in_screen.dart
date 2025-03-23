@@ -78,11 +78,9 @@ class _SignInScreenState extends State<SignInScreen> {
                     !signInProvider.usernameTextField()
                         ? signInProvider.viewNameError() : !signInProvider.passwordTextField()
                         ? signInProvider.viewPasswordError(): await signInProvider.signInTest()
-                        ? signInProvider.viewSignInError()
-                        : null;
-                    Navigator.of(context)
+                        ? Navigator.of(context)
                         .pushReplacement(
-                        MaterialPageRoute(builder: (context) => HomeScreen()));
+                        MaterialPageRoute(builder: (context) => HomeScreen())) : signInProvider.viewSignInError();
                   }),
                   Spacer(),
                   Container(
