@@ -8,7 +8,9 @@ final titleRegular = TextStyle(fontSize: 30, fontFamily: notoSans, fontWeight: F
 
 final bodyBold = TextStyle(fontSize: 15, fontFamily: notoSans, fontWeight: FontWeight.w800);
 final bodyMedium = TextStyle(fontSize: 13, fontFamily: notoSans, fontWeight: FontWeight.w600);
+final bodyMediumSizeUp = TextStyle(fontSize: 25, fontFamily: notoSans, fontWeight: FontWeight.w600);
 final bodyRegular = TextStyle(fontSize: 13, fontFamily: notoSans, fontWeight: FontWeight.w400);
+final bodyRegularSizeUp = TextStyle(fontSize: 25, fontFamily: notoSans, fontWeight: FontWeight.w400);
 
 
 extension TextExtension on TextStyle {

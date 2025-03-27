@@ -14,6 +14,8 @@ class SignInProvider extends ChangeNotifier {
 
   bool passwordReset = false;
 
+  String tkn = '';
+
   bool usernameTextField() {
     if(usernameController.text.length >= 4) {
       return true;
@@ -29,7 +31,8 @@ class SignInProvider extends ChangeNotifier {
   }
 
   Future<bool> signInTest() async {
-    if(await authRepository.signIn(usernameController.text, passwordController.text) == true) {
+    tkn = await authRepository.signIn(usernameController.text, passwordController.text) ?? '';
+    if(tkn != '') {
       return true;
     }
     return false;

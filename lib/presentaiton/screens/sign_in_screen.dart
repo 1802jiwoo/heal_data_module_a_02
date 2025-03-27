@@ -5,6 +5,7 @@ import 'package:module_a_practice3/presentaiton/components/custom_button2.dart';
 import 'package:module_a_practice3/presentaiton/components/custom_text_field.dart';
 import 'package:module_a_practice3/presentaiton/providers/sign_in_provider.dart';
 import 'package:module_a_practice3/presentaiton/screens/home_screen.dart';
+import 'package:module_a_practice3/presentaiton/screens/main_screen.dart';
 import 'package:module_a_practice3/presentaiton/screens/sign_up_screen.dart';
 
 import '../components/error_box.dart';
@@ -80,7 +81,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         ? signInProvider.viewPasswordError(): await signInProvider.signInTest()
                         ? Navigator.of(context)
                         .pushReplacement(
-                        MaterialPageRoute(builder: (context) => HomeScreen())) : signInProvider.viewSignInError();
+                        MaterialPageRoute(builder: (context) => MainScreen(tkn: signInProvider.tkn,))) : signInProvider.viewSignInError();
                   }),
                   Spacer(),
                   Container(

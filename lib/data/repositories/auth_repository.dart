@@ -12,7 +12,7 @@ class AuthRepository {
 
   final String tkn = '49D9F99FD50B4AB1A5F6CF64B482C736';
 
-  Future<bool> signIn(String id, String password) async {
+  Future<String?> signIn(String id, String password) async {
     try {
       final body = {
         'mberId': id,
@@ -26,10 +26,10 @@ class AuthRepository {
         }
       );
       final jsonBody = jsonDecode(response.body);
-      return jsonBody['success'];
+      return jsonBody['tkn'];
     } catch(e) {
       print(e);
-      return false;
+      return null;
     }
   }
 
